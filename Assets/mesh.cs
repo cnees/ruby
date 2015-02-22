@@ -16,18 +16,15 @@ public class mesh : MonoBehaviour {
 		//uvs = new List<Vector2>();
 		GetComponent<MeshFilter>().mesh = new Mesh();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
+	// Get rid of mesh
 	public void reset() {
 		points.Clear();
 		triangles.Clear();
 		GetComponent<MeshFilter>().mesh.Clear ();
 	}
 
+	// Adds newPoint to mesh
 	public void meshMaker(Vector3 newPoint) {
 
 		// Add point
@@ -48,12 +45,14 @@ public class mesh : MonoBehaviour {
 			triangles.Add (points.Count - 2);
 		}
 
+		// Three or more points are needed to start the mesh
 		if(triangles.Count >= 3) {
-			GetComponent<MeshFilter>().mesh.RecalculateNormals();
-			GetComponent<MeshFilter>().mesh.name = "Test mesh";
+			// Clear old mesh
 			GetComponent<MeshFilter>().mesh.Clear ();
+			// Update vertices and triangles
 			GetComponent<MeshFilter>().mesh.vertices = points.ToArray();
 			GetComponent<MeshFilter>().mesh.triangles = triangles.ToArray();
+			// UVs are for mapping textures. You should ignore them.
 			Vector2[] uvs = new Vector2[points.Count];
 			Vector3[] verts = GetComponent<MeshFilter>().mesh.vertices;
 			for (int i = 0; i < uvs.Length; i++) {
@@ -63,6 +62,8 @@ public class mesh : MonoBehaviour {
 			GetComponent<MeshFilter>().mesh.RecalculateNormals();
 			GetComponent<MeshFilter>().mesh.RecalculateBounds();
 			GetComponent<MeshFilter>().mesh.Optimize();
+
+			// Refersh collider
 			GetComponent<MeshCollider>().sharedMesh = null;
 			GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().mesh;
 		}

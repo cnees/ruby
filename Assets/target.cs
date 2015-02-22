@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+ * This is a vestigial script. It's not being used for anything at the moment.
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class target : MonoBehaviour {
@@ -8,11 +12,6 @@ public class target : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameObject.renderer.material.color = Color.blue;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
 	void OnTriggerEnter(Collider other) {
