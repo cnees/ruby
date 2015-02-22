@@ -1,0 +1,18 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/drawPoint.cs">
+    <Files>
+      <File FileName="Assets/MoveCamera.cs" Line="43" Column="4" />
+      <File FileName="Assets/target.cs" Line="31" Column="28" />
+      <File FileName="Assets/drawPoint.cs" Line="22" Column="54" />
+      <File FileName="Assets/mesh.cs" Line="59" Column="22" />
+      <File FileName="Assets/bomb.cs" Line="29" Column="83" />
+      <File FileName="Assets/ground.cs" Line="31" Column="56" />
+      <File FileName="Assets/score.cs" Line="2" Column="22" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
