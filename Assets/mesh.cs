@@ -24,6 +24,44 @@ public class mesh : MonoBehaviour {
 		GetComponent<MeshFilter>().mesh.Clear ();
 	}
 
+	private void updateMesh() {
+		// Three or more points are needed to start the mesh
+		if(triangles.Count >= 3) {
+			// Clear old mesh
+			GetComponent<MeshFilter>().mesh.Clear ();
+			// Update vertices and triangles
+			GetComponent<MeshFilter>().mesh.vertices = points.ToArray();
+			GetComponent<MeshFilter>().mesh.triangles = triangles.ToArray();
+			// UVs are for mapping textures. You should ignore them.
+			Vector2[] uvs = new Vector2[points.Count];
+			Vector3[] verts = GetComponent<MeshFilter>().mesh.vertices;
+			for (int i = 0; i < uvs.Length; i++) {
+				uvs[i] = new Vector2(verts[i].x, verts[i].z);
+			}
+			GetComponent<MeshFilter>().mesh.uv = uvs;
+			GetComponent<MeshFilter>().mesh.RecalculateNormals();
+			GetComponent<MeshFilter>().mesh.RecalculateBounds();
+			GetComponent<MeshFilter>().mesh.Optimize();
+			
+			// Refersh collider
+			GetComponent<MeshCollider>().sharedMesh = null;
+			GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().mesh;
+		}
+	}
+
+	public void dropLastTriangle() {
+		if(points.Count >= 3) {
+			triangles.RemoveAt(triangles.Count - 1);
+			triangles.RemoveAt(triangles.Count - 1);
+			triangles.RemoveAt(triangles.Count - 1);
+			triangles.RemoveAt(triangles.Count - 1);
+			triangles.RemoveAt(triangles.Count - 1);
+			triangles.RemoveAt(triangles.Count - 1);
+			points.RemoveAt(points.Count - 1);
+			updateMesh();
+		}
+	}
+	
 	// Adds newPoint to mesh
 	public void meshMaker(Vector3 newPoint) {
 
@@ -45,27 +83,6 @@ public class mesh : MonoBehaviour {
 			triangles.Add (points.Count - 2);
 		}
 
-		// Three or more points are needed to start the mesh
-		if(triangles.Count >= 3) {
-			// Clear old mesh
-			GetComponent<MeshFilter>().mesh.Clear ();
-			// Update vertices and triangles
-			GetComponent<MeshFilter>().mesh.vertices = points.ToArray();
-			GetComponent<MeshFilter>().mesh.triangles = triangles.ToArray();
-			// UVs are for mapping textures. You should ignore them.
-			Vector2[] uvs = new Vector2[points.Count];
-			Vector3[] verts = GetComponent<MeshFilter>().mesh.vertices;
-			for (int i = 0; i < uvs.Length; i++) {
-				uvs[i] = new Vector2(verts[i].x, verts[i].z);
-			}
-			GetComponent<MeshFilter>().mesh.uv = uvs;
-			GetComponent<MeshFilter>().mesh.RecalculateNormals();
-			GetComponent<MeshFilter>().mesh.RecalculateBounds();
-			GetComponent<MeshFilter>().mesh.Optimize();
-
-			// Refersh collider
-			GetComponent<MeshCollider>().sharedMesh = null;
-			GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().mesh;
-		}
+		updateMesh();
 	}
 }

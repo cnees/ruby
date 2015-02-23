@@ -6,7 +6,7 @@ public class MoveCamera : MonoBehaviour {
 	public Transform scoreKeeper; // Object holding the script that keeps score
 	public Transform mesh; // User generated mesh
 
-	private float speed = 0.25f; // Movement speed in meters per Update()
+	private float speed = 0.3f; // Movement speed in meters per Update()
 	
 	// Update is called once per frame
 	void Update () {
@@ -45,21 +45,31 @@ public class MoveCamera : MonoBehaviour {
 
 		if(Input.GetKey(KeyCode.Q)) {
 			transform.RotateAround(Vector3.zero, transform.forward, -1f);
+			//transform.LookAt(transform.position + transform.forward * 10f);
 		}
 		else if(Input.GetKey(KeyCode.E)) {
 			transform.RotateAround(Vector3.zero, transform.forward, 1f);
+			//transform.LookAt(transform.position + transform.forward * 10f);
 		}
-		if(Input.GetKey(KeyCode.S)) {
+		if(Input.GetKey(KeyCode.W)) {
 			transform.RotateAround(Vector3.zero, transform.right, 1f);
+			//transform.RotateAround(transform.position + transform.forward * 10f, transform.right, 1f);
+			//transform.LookAt(transform.position + transform.forward * 10f);
 		}
-		else if(Input.GetKey(KeyCode.W)) {
+		else if(Input.GetKey(KeyCode.S)) {
 			transform.RotateAround(Vector3.zero, transform.right, -1f);
+			//transform.RotateAround(transform.position + transform.forward * 10f, transform.right, -1f);
+			//transform.LookAt(transform.position + transform.forward * 10f);
 		}
 		if(Input.GetKey(KeyCode.A)) {
 			transform.RotateAround(Vector3.zero, transform.up, 1f);
+			//transform.RotateAround(transform.position + transform.forward * 10f, transform.up, 1f);
+			//transform.LookAt(transform.position + transform.forward * 10f);
 		}
 		else if(Input.GetKey(KeyCode.D)) {
 			transform.RotateAround(Vector3.zero, transform.up, -1f);
+			//transform.RotateAround(transform.position + transform.forward * 10f, transform.up, -1f);
+			//transform.LookAt(transform.position + transform.forward * 10f);
 		}
 		if(Input.GetKey(KeyCode.U)) {
 			transform.Translate(Vector3.forward * speed);

@@ -17,6 +17,7 @@ public class drawPoint : MonoBehaviour {
 	private List<Vector3> platformLoc;
 	private List<GameObject> platforms;
 
+	private bool justAddedPoint = false;
 	// Use this for initialization
 	void Start () {
 		vertices = new Transform[2];
@@ -29,11 +30,18 @@ public class drawPoint : MonoBehaviour {
 	void Update () {
 		// Point is always 10m in front of the camera and in the middle of the window
 		Vector3 previewPos = Camera.main.transform.position + Camera.main.transform.forward * 10f; 
-		transform.position = previewPos;
+
+		if(transform.position != previewPos) {
+			transform.position = previewPos;
+			if(vertices[1] != null) {
+				mesh.GetComponent<mesh>().dropLastTriangle();
+				mesh.GetComponent<mesh>().meshMaker(previewPos);
+			}
+		}
 
 		// Add vertex at position where transparent gray preview point is
 		if(Input.GetKeyUp(KeyCode.Space)) {
-
+			justAddedPoint = true;
 			// Make oldest vertex black
 			// Only the most recent two vertices will remain white, since they'll be in the next triangle 
 			if(vertices[0] != null) {
