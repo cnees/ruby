@@ -82,20 +82,23 @@ public class drawPoint : MonoBehaviour {
 			cube.GetComponent<BoxCollider>().isTrigger = true;
 			cube.AddComponent("ground");
 			cube.GetComponent<ground>().scoreKeeper = scoreKeeper.transform;
-			platforms.Add(cube);
-			
-			
-			if(platforms.Count == numPlatformsAllowed){
-				platformInfo.text = "Out of platforms";
-			}
-			else if((platforms.Count % 2 == 0)){
+
+			int platform_count_to_be = platforms.Count + 1;
+
+			if((platforms.Count % 2 == 0)){
 				cube.GetComponent<Renderer>().renderer.material = cyan;
-				platformInfo.text = (numPlatformsAllowed-platforms.Count)+" pfrms left, drawing red";
+				platformInfo.text = (numPlatformsAllowed-platform_count_to_be)+" pfrms left, drawing red";
 			}
 			else {
 				cube.GetComponent<Renderer>().renderer.material = red;
-				platformInfo.text = (numPlatformsAllowed-platforms.Count)+" pfrms left, drawing cyan";
+				platformInfo.text = (numPlatformsAllowed-platform_count_to_be)+" pfrms left, drawing cyan";
 			}
+
+			if(platform_count_to_be == numPlatformsAllowed){
+				platformInfo.text = "Out of platforms";
+			}
+
+			platforms.Add(cube);
 			
 		}
 	}
